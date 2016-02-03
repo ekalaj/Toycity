@@ -92,18 +92,18 @@ brand_names.each do |name|
   brand_shipping_total = 0
   brand_revenue_total = 0
   
-  brand_math.each do |stuff|
+  brand_math.each do |stock|
     # Count the number of the brand's toys we stock
-    brands_in_stock = brands_in_stock + stuff["stock"]
+    brands_in_stock = brands_in_stock + stock["stock"]
        
     #Calculate the average price of the brand's toys
-    brand_price_total = brand_price_total + stuff["full-price"].to_f
+    brand_price_total = brand_price_total + stock["full-price"].to_f
     average_brand_price = brand_price_total / brand_number_of_toys
-      # loop over stuff to pull out the 2nd dimension purchases
-      stuff["purchases"].each do |whee|
-        brand_revenue_gross = brand_revenue_gross + whee["price"].to_f
-        brand_shipping_total = brand_shipping_total + whee["shipping"].to_f
-        brand_revenue_total = brand_revenue_gross - brand_shipping_total
+      # loop over stock to pull out the 2nd dimension purchases
+      stock["purchases"].each do |donkey| #naming these is kinda fun
+        brand_revenue_gross = brand_revenue_gross + donkey["price"].to_f
+        #brand_shipping_total = brand_shipping_total + donkey["shipping"].to_f (I had these useless formulas in an earlier version)
+        #brand_revenue_total = brand_revenue_gross - brand_shipping_total
       end
     
     
@@ -117,7 +117,7 @@ brand_names.each do |name|
   
   # Calculate and print the total revenue of all the brand's toy sales combined
   # Total revenue minus shipping
-  puts "  Total brand toy Revenue: $ #{brand_revenue_total.round(2)}"
+  puts "  Total brand toy Revenue: $ #{brand_revenue_gross.round(2)}"
   puts
   
 
